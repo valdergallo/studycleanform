@@ -57,8 +57,8 @@ Qual é a Lógica de negocio de um Bar ?
     	produto = models.ForeignKey(Produto)
     	data_de_venda = models.DateTimeField(auto_now_add=True)
     
-    def __unicode__(self):
-        return '%s - %s - %s' % (self.comprador, self.produto, self.data_de_venda) 
+        def __unicode__(self):
+            return '%s - %s - %s' % (self.comprador, self.produto, self.data_de_venda) 
 
 Quais são as Regras de negocio do Bar ?
 --------------------------------------------------------
