@@ -24,7 +24,7 @@ Qual é a Lógica de negocio de um Bar ?
 					1.2.2 Sprite
 					1.2.3 Fanta 	
 
- Como eu poderia fazer algo assim em Django ?
+ Como ficaria o model.py do App de Django  ?
 
 	class Categoria(models.Model):
 		nome = models.CharField(max_length=100)
@@ -72,7 +72,7 @@ Quais são as Regras de negocio do Bar ?
 
 > Essas regras devem estar definidas no Form do Django. Mas eu tenho regras em comum, entre meus produtos e gostaria de centralizar essas regras para facilitar a reutilização do meu código. E também pode acontecer de eu montar um outro bar e essas regras podem mudar de acordo com o estado ou pais.  Sendo assim, eu não posso colocar essas definições no Model.
 
- Como ficaria em Django
+ Como ficaria form.py o App em Django
 
 	class BaseSoParaMaioresForm(forms.BaseForm):
    		def clean_user(self):
