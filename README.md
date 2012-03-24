@@ -59,7 +59,7 @@ Como eu poderia fazer algo assim em Django ?
     
     def __unicode__(self):
         return '%s - %s - %s' % (self.comprador, self.produto, self.data_de_venda) 
-
+--------------------------------------------------------
 
 2. Quais são as Regras de negocio do Bar ?
 --------------------------------------------------------
