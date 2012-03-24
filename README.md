@@ -1,97 +1,46 @@
-#Reutilizando métodos clean para vários forms com Django
+#forms.FormBase is very powerful to use common clean_fields on differents Django Forms
+
+ 	Sometimes we need create commons clean_field on all Django Form in project. And this code need be in just one file to one better debug.
+
+#### How i can do recycle my clen_field on differents Forms?
+
+	class BaseBurnForm(forms.BaseForm):
+    	"""
+    	I will need this cleans on all my project
+    	"""
+		def clean_char_null(self):
+       		char_null = self.cleaned_data.get('char_null')
+        		if len(char_null):
+            		raise forms.ValidationError('This Field must be null')
+        	return self.cleaned_data
+
+    	def clean_char_50(self):
+       		char_50 = self.cleaned_data.get('char_50')
+       		if len(char_50) <= 10:
+           		raise forms.ValidationError('This Field must have more than 10 char')
+       		return self.cleaned_data
+
+    	def clean_char_255(self):
+       		char_255 = self.cleaned_data.get('char_255')
+       		if len(char_255) <= 10:
+           		raise forms.ValidationError('This Field must have more than 10 char')
+        		return self.cleaned_data
 
 
-###Como fazer validação de negócios de todo o sistema em Django?
-
-	O Django possui algumas particularidades. No Model deve ficar a lógica de negócio e os Forms devem validar as regras de negocio.
-
-#### Qual a diferença entre lógica de negócio e regra de negócio
-
-	Vou tocar nesse tópico apenas porque notei uma grande dificuldades nessa separação durante um tempo nos profissionais que tive contato.
-
-
-Qual é a Lógica de negocio de um Bar ?
---------------------------------------------------------
- Produtos divididos por categorias e subcategoria, com descrição e valor de compra e valor de venda. 
-
-		 1. Bebidas 
-				1.1 Refrigerante 1L
-					1.1.1 Coca Cola
-					1.1.2 Sprite
-					1.1.3 Fanta
-				1.2 Refrigerantes 300ml
-					1.2.1 Coca Cola
-					1.2.2 Sprite
-					1.2.3 Fanta 	
-
- Como ficaria o model.py do App de Django  ?
-
-	class Categoria(models.Model):
-		nome = models.CharField(max_length=100)
-	
-		def __unicode__(self):
-	   		return self.nome
+	class BurnTextModelForm(forms.ModelForm, BaseBurnForm):
+    	"""
+    	char_255 = models.CharField(max_length=255, null=True, blank=True)
+    	char_50 = models.CharField(max_length=50, null=True, blank=True)
+    	"""
+    	class Meta:
+       	model = BurnTextNull
 
 
-	class Subcategoria(models.Model):
-		categoria = models.ForeignKey(Categoria)
-		nome = models.CharField(max_length=100)
+	class BurnTextForm(forms.Form, BaseBurnForm):
+    	"""
+    	One Simple Django Form with 2 fields
+    	"""
+    	char_null = forms.CharField(required=False)
+    	char_50 = forms.CharField(max_length=50)
 
-		def __unicode__(self):
-	   		return self.nome
-
-
-	class Produto(models.Model):
-		categoria = models.ForeignKey(Categoria)
-		subcategoria = models.ForeignKey(Subcategoria)
-		nome = models.CharField(max_length=255)
-		descricao = models.TextField(null=True, blank=True)
-		custo = models.DecimalField(max_digits=5, decimal_places=2)
-		valor = models.DecimalField(max_digits=5, decimal_places=2)
-
-		def __unicode__(self):
-	   		return "%s | %s - %s" % (self.categoria, self.subcategoria, self.nome)
-
-	class Venda(models.Model):
-    	comprador = models.ForeignKey(User)
-    	produto = models.ForeignKey(Produto)
-    	data_de_venda = models.DateTimeField(auto_now_add=True)
-    
-        def __unicode__(self):
-            return '%s - %s - %s' % (self.comprador, self.produto, self.data_de_venda) 
-
-Quais são as Regras de negocio do Bar ?
---------------------------------------------------------
- Agora pense que vc possui uma regra para vender refrigerante, cerveja, cigarro, lanches e salgados.
-
-	- Refrigerantes - pode ser vendido para todos
-	- Cerveja - pode ser vendido apenas para maiores de 18 anos e gelada
-	- Cigarro - pode ser vendido apenas para maiores de 18 anos
-	- Salgado - Pode ser vendido para qualquer um
-	- Lanche - pode ser vendido para qualquer um 
-
-> Essas regras devem estar definidas no Form do Django. Mas eu tenho regras em comum, entre meus produtos e gostaria de centralizar essas regras para facilitar a reutilização do meu código. E também pode acontecer de eu montar um outro bar e essas regras podem mudar de acordo com o estado ou pais.  Sendo assim, eu não posso colocar essas definições no Model.
-
- Como ficaria form.py o App em Django
-
-	class BaseSoParaMaioresForm(forms.BaseForm):
-   		def clean_user(self):
-        	user = self.cleaned_data.get('user')
-        	if user:
-            	user.get_profile.age < 18:
-            	raise forms.ValidateErros(u"É proibida a venda de bebidas para menores de 18 anos no Brasil")
-
-
-	class CervejaForm(forms.ModelForm, BaseSoParaMaioresForm):
-   		class Meta:
-       	model = Venda
-
-		def __init__(self):
-			self.fields['produto'] = Produto.objects.filter(categoria__nome='Bebidas', subcategoria__nome='Cerveja')
-
-	class CigarroForm(forms.ModelForm, BaseSoParaMaioresForm):
-   		class Meta:
-       	model = Venda
-
-		def __init__(self):
-			self.fields['produto'] = Produto.objects.filter(categoria__nome='Outros', subcategoria__nome='Cigarro')
+Easy and powerful :P

@@ -5,6 +5,9 @@ from burn.models import BurnTextNull
 
 
 class BaseBurnForm(forms.BaseForm):
+    """
+    I will need this cleans on all my project
+    """
     def clean_char_null(self):
         char_null = self.cleaned_data.get('char_null')
         if len(char_null):
