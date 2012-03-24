@@ -24,7 +24,7 @@
        		char_255 = self.cleaned_data.get('char_255')
        		if len(char_255) <= 10:
            		raise forms.ValidationError('This Field must have more than 10 char')
-        		return self.cleaned_data
+        	return self.cleaned_data
 
 
 	class BurnTextModelForm(forms.ModelForm, BaseBurnForm):
