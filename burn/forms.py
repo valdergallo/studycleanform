@@ -3,6 +3,7 @@
 from django import forms
 from burn.models import BurnTextNull
 
+
 class BaseBurnForm(forms.BaseForm):
     def clean_char_null(self):
         char_null = self.cleaned_data.get('char_null')
