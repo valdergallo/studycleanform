@@ -10,7 +10,7 @@
 	Vou tocar nesse tópico apenas porque notei uma grande dificuldades nessa separação durante um tempo nos profissionais que tive contato.
 
 
-1. Qual é a Lógica de negocio de um Bar ?
+Qual é a Lógica de negocio de um Bar ?
 --------------------------------------------------------
  Produtos divididos por categorias e subcategoria, com descrição e valor de compra e valor de venda. 
 
@@ -60,7 +60,7 @@
     def __unicode__(self):
         return '%s - %s - %s' % (self.comprador, self.produto, self.data_de_venda) 
 
-2. Quais são as Regras de negocio do Bar ?
+Quais são as Regras de negocio do Bar ?
 --------------------------------------------------------
  Agora pense que vc possui uma regra para vender refrigerante, cerveja, cigarro, lanches e salgados.
 
