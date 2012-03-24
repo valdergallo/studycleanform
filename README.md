@@ -59,7 +59,6 @@ Como eu poderia fazer algo assim em Django ?
     
     def __unicode__(self):
         return '%s - %s - %s' % (self.comprador, self.produto, self.data_de_venda) 
---------------------------------------------------------
 
 2. Quais são as Regras de negocio do Bar ?
 --------------------------------------------------------
@@ -72,7 +71,6 @@ Como eu poderia fazer algo assim em Django ?
 	- Lanche - pode ser vendido para qualquer um 
 
 	Essas regras devem estar definidas no Form do Django. Mas eu tenho regras em comum, entre meus produtos e gostaria de centralizar essas regras para facilitar a reutilização do meu código. E também pode acontecer de eu montar um bar em outro pais essas regras podem mudar de acordo com o estado ou pais.  Sendo assim, eu não posso colocar essas definições no model.
---------------------------------------------------------
 
 Como ficaria em Django
 
