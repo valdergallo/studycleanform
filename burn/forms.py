@@ -34,6 +34,9 @@ class BurnTextModelForm(forms.ModelForm, BaseBurnForm):
 
 
 class BurnTextForm(forms.Form, BaseBurnForm):
+    """
+    One Simple Django Form with 2 fields
+    """
     char_null = forms.CharField(required=False)
     char_50 = forms.CharField(max_length=50)
 
