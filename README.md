@@ -12,7 +12,7 @@
 
 1. Qual é a Lógica de negocio de um Bar ?
 --------------------------------------------------------
-Produtos divididos por categorias e subcategoria, com descrição e valor de compra e valor de venda. 
+ Produtos divididos por categorias e subcategoria, com descrição e valor de compra e valor de venda. 
 
 		 1. Bebidas 
 				1.1 Refrigerante 1L
@@ -24,7 +24,7 @@ Produtos divididos por categorias e subcategoria, com descrição e valor de com
 					1.2.2 Sprite
 					1.2.3 Fanta 	
 
-Como eu poderia fazer algo assim em Django ?
+ Como eu poderia fazer algo assim em Django ?
 
 	class Categoria(models.Model):
 		nome = models.CharField(max_length=100)
@@ -62,7 +62,7 @@ Como eu poderia fazer algo assim em Django ?
 
 2. Quais são as Regras de negocio do Bar ?
 --------------------------------------------------------
-	Agora pense que vc possui uma regra para vender refrigerante, cerveja, cigarro, lanches e salgados.
+ Agora pense que vc possui uma regra para vender refrigerante, cerveja, cigarro, lanches e salgados.
 
 	- Refrigerantes - pode ser vendido para todos
 	- Cerveja - pode ser vendido apenas para maiores de 18 anos e gelada
@@ -70,9 +70,9 @@ Como eu poderia fazer algo assim em Django ?
 	- Salgado - Pode ser vendido para qualquer um
 	- Lanche - pode ser vendido para qualquer um 
 
-	Essas regras devem estar definidas no Form do Django. Mas eu tenho regras em comum, entre meus produtos e gostaria de centralizar essas regras para facilitar a reutilização do meu código. E também pode acontecer de eu montar um bar em outro pais essas regras podem mudar de acordo com o estado ou pais.  Sendo assim, eu não posso colocar essas definições no model.
+> Essas regras devem estar definidas no Form do Django. Mas eu tenho regras em comum, entre meus produtos e gostaria de centralizar essas regras para facilitar a reutilização do meu código. E também pode acontecer de eu montar um bar em outro pais essas regras podem mudar de acordo com o estado ou pais.  Sendo assim, eu não posso colocar essas definições no model.
 
-Como ficaria em Django
+ Como ficaria em Django
 
 	class BaseSoParaMaioresForm(forms.BaseForm):
    		def clean_user(self):
