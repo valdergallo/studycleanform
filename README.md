@@ -33,7 +33,7 @@
     	char_50 = models.CharField(max_length=50, null=True, blank=True)
     	"""
     	class Meta:
-       	model = BurnTextNull
+       		model = BurnTextNull
 
 
 	class BurnTextForm(forms.Form, BaseBurnForm):
