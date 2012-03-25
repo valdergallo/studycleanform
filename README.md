@@ -1,7 +1,5 @@
 #forms.FormBase is very powerful to use common clean_fields on differents Django Forms
 
- 	Sometimes we need create commons clean_field on all Django Form in project. And this code need be in just one file to one better debug.
-
 #### How i can recycle my clen_field on differents Forms?
 
 	class BaseBurnForm(forms.BaseForm):
